@@ -36,6 +36,33 @@ function isValidParen(paren) {
   return numOpen === numClose;
 }
 
+function isValid(brackets) {
+  let stack = [];
+  let hm = {
+    '[': ']',
+    '{': '}',
+    '(': ')'
+  }
+
+  for(let bracket of brackets) {
+    if(bracket === '[' || bracket === '{' || bracket === '(') {
+      stack.push(bracket);
+    } else {
+      if(!(hm[stack.pop()] === bracket)) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+}
+
+console.log('true', isValid('([])'));
+console.log('true', isValid('[{()}]'));
+console.log('false', isValid('([]'));
+console.log('false', isValid('([]}}}'));
+console.log('true', isValid('(){}[]'));
+
 console.log('true', isValidParen('([])'));
 console.log('true', isValidParen('[{()}]'));
 console.log('false', isValidParen('([]'));
