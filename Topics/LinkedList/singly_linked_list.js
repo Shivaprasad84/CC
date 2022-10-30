@@ -98,6 +98,28 @@ class LinkedList {
     }
     this.head = prev;
   }
+
+  copy() {
+    const new_list = new LinkedList();
+    let trav = this.head;
+    while(trav !== null) {
+      new_list.push_back(trav.data);
+      trav = trav.next;
+    }
+    return new_list.get_head();
+  }
+
+  get_head() {
+    return this.head;
+  }
+}
+
+function print_list(head) {
+  let trav = head;
+  while(trav !== null) {
+    print(trav.data);
+    trav = trav.next;
+  }
 }
 
 const lst = new LinkedList();
@@ -107,7 +129,14 @@ lst.push_back(2);
 lst.push_back(3);
 lst.push_back(4);
 lst.push_back(5);
-
 lst.reverse();
 
 lst.print_list();
+
+let new_head = lst.copy();
+lst.update_at(1, 100);
+let head = lst.get_head();
+
+print_list(head);
+print('*');
+print_list(new_head);
